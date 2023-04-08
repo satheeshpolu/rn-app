@@ -1,3 +1,4 @@
-import SplashScreen from './splash'
+import HomeScreen from './home/index';
+import SplashScreen from './splash/index';
 
-export default { SplashScreen };
+export default { SplashScreen, HomeScreen };
