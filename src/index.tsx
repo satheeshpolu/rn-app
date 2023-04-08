@@ -1,9 +1,10 @@
 import React from 'react';
 import { Provider, DefaultTheme, Text } from 'react-native-paper';
+import SplashScreen from './screens/splash';
 const App = (): JSX.Element => {
     return (
         <Provider theme={DefaultTheme}>
-            <Text>React native mobile app.</Text>
+            <SplashScreen />
         </Provider>
     );
 }
