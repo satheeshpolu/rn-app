@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent:
             'center',
-            padding: 15,
+        padding: 15,
     },
     text: {
         textAlign: 'center',
