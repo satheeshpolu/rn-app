@@ -16,7 +16,7 @@ const LoginScreen = ({ navigation }: ScreenProps) => {
     return (
         <View style={styles.container}>
             <Button
-                title="Go to Jane's profile"
+                title="Go to Home"
                 onPress={() =>
                     navigation.navigate('Home')
                 }
