@@ -1,4 +1,10 @@
 {
   "name": "RNApp",
-  "displayName": "RNApp"
+  "displayName": "RNApp",
+  "ios": {
+    "icon": "./src/assets/icon/app-icon.png"
+  },
+  "android": {
+    "icon": "./src/assets/icon/app-icon.png"
+  }
 }
