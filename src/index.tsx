@@ -15,7 +15,7 @@ const App = (): JSX.Element => {
         <Stack.Screen
           name="Home"
           component={isAppLoading ? SplashScreen : HomeScreen}
-          options={{ title: 'Welcome' }}
+          options={{ title: 'Welcome', headerShown: false }}
         />
         <Stack.Screen
           name="Login"
