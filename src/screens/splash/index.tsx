@@ -12,7 +12,6 @@ const SplashScreen = (): JSX.Element => {
     <View style={styles.container}>
       <StatusBar hidden={true} />
       <Text style={styles.text}>{currentTime}</Text>
-      <Text style={styles.text}>Splash Screen</Text>
     </View>
   );
 };
