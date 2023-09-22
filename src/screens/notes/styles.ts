@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     color: '#010128',
   },
   noteSection: {
-    //marginBottom: 50,
+    gap: 10,
   },
 });
 

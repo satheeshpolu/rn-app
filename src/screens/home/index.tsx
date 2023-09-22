@@ -8,14 +8,18 @@ type ScreenProps = {
   navigation: NavigationProp<any, any>;
 };
 const HomeScreen = ({ navigation }: ScreenProps): JSX.Element => {
-  const sendTo = () => {
-    navigation.navigate('Login');
+  const sendToNote = () => {
+    navigation.navigate('Note');
   };
 
+  const sendToLogin = () => {
+    navigation.navigate('Login');
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Home Screen</Text>
-      <Button title="Go To Login" onPress={sendTo} />
+      <Button title="Login App" onPress={sendToLogin} />
+      <Button title="Notes App" onPress={sendToNote} />
     </View>
   );
 };
