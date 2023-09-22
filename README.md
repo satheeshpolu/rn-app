@@ -16,11 +16,11 @@ npm start
 
 ```
 
-# Setup dotenv package
+# Setup react-native-dotenv package
 Open the terminal and go to root-directory of the project.
 Run command below.
 ```
-npm install dotenv
+npm install react-native-dotenv
 
-Note: For uninstall dotenv package run command => npm uni dotenv or npm uninstall dotenv
+Note: For uninstall react-native-dotenv package run command => npm uni react-native-dotenv or npm uninstall react-native-dotenv
 ```
