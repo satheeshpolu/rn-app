@@ -1,47 +1,25 @@
 import React from 'react';
-import { Button, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 
 import styles from './styles';
-import { NavigationScreenProp } from 'react-navigation';
-import { TextInput } from 'react-native-paper';
-import axios from 'axios';
+import { NavigationProp } from '@react-navigation/native';
 
 type ScreenProps = {
-  navigation: NavigationScreenProp<any, any>;
+  navigation: NavigationProp<any, any>;
 };
-
-const LoginScreen = ({ navigation }: ScreenProps) => {
-  const [title, setTitle] = React.useState('');
-  const [desc, setDesc] = React.useState('');
-
-  const saveNotes = async () => {
-    await axios
-      .post('api/v1/add-note', {
-        note_title: title,
-        note_description: desc,
-      })
-      .then(function (response) {
-        console.log('res => ', response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+const LoginScreen = ({ navigation }: ScreenProps): JSX.Element => {
+  const sendTo = () => {
+    navigation.navigate('Note');
   };
 
+  const sendToLogin = () => {
+    navigation.navigate('Login');
+  };
   return (
     <View style={styles.container}>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <TextInput
-        label="Title"
-        value={title}
-        onChangeText={text => setTitle(text)}
-      />
-      <TextInput
-        label="Description"
-        value={desc}
-        onChangeText={text => setDesc(text)}
-      />
-      <Button title="Save Notes" onPress={saveNotes} />
+      <Text style={styles.text}>Home Screen</Text>
+      <Button title="Login App" onPress={sendToLogin} />
+      <Button title="Notes App" onPress={sendTo} />
     </View>
   );
 };

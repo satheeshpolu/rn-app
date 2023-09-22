@@ -1,5 +1,6 @@
-import HomeScreen from './home/index';
-import LoginScreen from './login/index';
-import SplashScreen from './splash/index';
+import HomeScreen from "./home";
+import LoginScreen from "./login";
+import NoteScreen from "./notes";
+import SplashScreen from "./splash";
 
-export default { SplashScreen, HomeScreen, LoginScreen };
+export default { SplashScreen, HomeScreen, LoginScreen, NoteScreen };

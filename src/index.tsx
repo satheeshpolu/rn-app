@@ -6,6 +6,7 @@ const Stack = createNativeStackNavigator();
 import SplashScreen from './screens/splash';
 import HomeScreen from './screens/home';
 import LoginScreen from './screens/login';
+import NoteScreen from './screens/notes';
 const App = (): JSX.Element => {
   const [isAppLoading, setAppLoading] = useState(true);
   setTimeout(() => setAppLoading(false), 2000);
@@ -21,6 +22,11 @@ const App = (): JSX.Element => {
           name="Login"
           component={LoginScreen}
           // options={{ title: 'Login'}}
+        />
+        <Stack.Screen
+          name="Note"
+          component={NoteScreen}
+          options={{ title: 'Note App'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
