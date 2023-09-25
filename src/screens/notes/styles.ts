@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   noteSection: {
     gap: 10,
   },
+  emptyMsg: {
+    textAlign: "center"
+  },
 });
 
 export default styles;
