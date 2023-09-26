@@ -7,6 +7,7 @@ import SplashScreen from './screens/splash';
 import HomeScreen from './screens/home';
 import LoginScreen from './screens/login';
 import NoteScreen from './screens/notes';
+import ProfileScreen from './screens/profile';
 const App = (): JSX.Element => {
   const [isAppLoading, setAppLoading] = useState(true);
   setTimeout(() => setAppLoading(false), 2000);
@@ -27,6 +28,11 @@ const App = (): JSX.Element => {
           name="Note"
           component={NoteScreen}
           options={{ title: 'Notes'}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{ title: 'Profile'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
