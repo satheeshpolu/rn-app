@@ -26,7 +26,7 @@ const App = (): JSX.Element => {
         <Stack.Screen
           name="Note"
           component={NoteScreen}
-          options={{ title: 'Note App'}}
+          options={{ title: 'Notes'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

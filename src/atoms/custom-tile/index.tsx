@@ -9,6 +9,7 @@ type ComponentProps = {
   tileColor?: string;
   iconName?: string; //JSX.Element; => Future enhancement
   iconColor?: string;
+  iconSize?: number;
   onClick?: () => void;
 };
 
@@ -18,6 +19,7 @@ const CustomTile = ({
   iconName,
   iconColor = '#818682',
   tileColor = '#dfe0df',
+  iconSize = 24,
   onClick,
 }: ComponentProps) => {
   return (
@@ -34,7 +36,7 @@ const CustomTile = ({
         {iconName && (
           <Icon
             name={iconName}
-            size={24}
+            size={iconSize}
             color={iconColor}
             style={styles.icon}
           />
