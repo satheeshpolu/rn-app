@@ -1,11 +1,14 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     //justifyContent: 'center',
     padding: 15,
-    marginBottom: 200,
+  },
+  listContainer: {
+    height: Dimensions.get('screen').height - 380,
+    gap: 20,
   },
   formSection: {
     gap: 10,
@@ -20,7 +23,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   emptyMsg: {
-    textAlign: "center"
+    textAlign: 'center',
   },
 });
 

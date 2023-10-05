@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Keyboard } from 'react-native';
 
 import styles from './styles';
@@ -10,6 +10,7 @@ import {
   Card,
   Snackbar,
   Text,
+  Searchbar,
 } from 'react-native-paper';
 import axios from 'axios';
 import CustomCard from '../../atoms/custom-card';
@@ -22,10 +23,37 @@ type ScreenProps = {
 };
 
 const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
-  const [title, setTitle] = React.useState('');
-  const [desc, setDesc] = React.useState('');
-  const [allNotes, setAllNotes] = React.useState([]);
-  const [showSnackbar, setShowSnackbar] = React.useState(false);
+  const [title, setTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [allNotes, setAllNotes] = useState([]);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [noteNotFoundMsg, setNoteNotFoundMsg] = useState(false);
+
+  // Search feature
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const onChangeSearch = query => {
+    setSearchQuery(query);
+    if (query === '') {
+      Keyboard.dismiss();
+      setNoteNotFoundMsg(false);
+      getAllNotes();
+    }
+    if (query.length < 1) return;
+    const copyArStr = JSON.stringify(allNotes);
+    const copyAr = JSON.parse(copyArStr);
+    const newAllNotes = copyAr.filter(note => {
+      const _title = note?.note_title.toLowerCase();
+      return _title.indexOf(query) > -1;
+    });
+    if (newAllNotes.length > 0) {
+      setNoteNotFoundMsg(false);
+      // sortDataByDate();
+      setAllNotes(newAllNotes);
+    } else {
+      setNoteNotFoundMsg(true);
+      setAllNotes([]);
+    }
+  };
 
   useEffect(() => {
     getAllNotes();
@@ -66,6 +94,7 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
         `${BE_SERVER_URL}:${BE_SERVER_PORT}/${API_VERSION}${API_ENDPOINT.GET_ALL_NOTES}`,
       )
       .then(function (response) {
+        sortDataByDate(response?.data?.result);
         setAllNotes(response?.data?.result);
         resetForm();
       })
@@ -77,6 +106,11 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
   const onCloseSnackbar = () => {
     setShowSnackbar(false);
   };
+
+  const sortDataByDate = data => {
+    return data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -95,26 +129,27 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
             {'Save Note'}
           </Button>
         </View>
-
         <View style={styles.noteSection}>
           <Divider bold={true} />
-          <ScrollView>
-            {allNotes?.map((note, index) => (
-              <CustomCard data={note} key={index} />
-            ))}
-          </ScrollView>
-          {allNotes.length === 0 && (
-            <Text style={styles.emptyMsg}>
-              {'Notes are empty, add new note.'}
-            </Text>
-          )}
+          <View style={styles.listContainer}>
+            <Searchbar
+              placeholder="Search"
+              onChangeText={onChangeSearch}
+              value={searchQuery}
+            />
+            {noteNotFoundMsg && (
+              <Text style={styles.emptyMsg}>{'Did not find any note.'}</Text>
+            )}
+            <ScrollView>
+              {allNotes?.map((note, index) => (
+                <CustomCard data={note} key={index} />
+              ))}
+            </ScrollView>
+          </View>
         </View>
       </View>
       {showSnackbar && (
-        <CustomSnackbar
-          title="Provide note info."
-          onClose={onCloseSnackbar}
-        />
+        <CustomSnackbar title="Provide note info." onClose={onCloseSnackbar} />
       )}
     </>
   );
