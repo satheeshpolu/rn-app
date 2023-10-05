@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Keyboard } from 'react-native';
+import { View, ScrollView, Keyboard, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 import { NavigationScreenProp } from 'react-navigation';
@@ -88,6 +88,10 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
     setShowSnackbar(false);
   };
 
+  const goToNoteDetails = (data: object) => {
+    navigation.navigate('NoteDetails', data);
+  };
+
   const getAllNotes = async () => {
     await axios
       .get(
@@ -134,12 +138,13 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
           <TextInput
             label="Title"
             value={title}
-            onChangeText={text => setTitle(text)}
+            onChangeText={text => setTitle(text)}           
           />
           <TextInput
             label="Description"
             value={desc}
             onChangeText={text => setDesc(text)}
+            multiline={true}
           />
           <Button icon="content-save" mode="contained" onPress={saveNotes}>
             {'Save Note'}
@@ -158,11 +163,13 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
             )}
             <ScrollView>
               {allNotes?.map((note, index) => (
-                <CustomCard
-                  data={note}
-                  key={index}
-                  onConfirm={() => deleteNote(note?.note_id)}
-                />
+                <TouchableOpacity key={index} onPress={() => goToNoteDetails(note)}>
+                  <CustomCard
+                    data={note}
+                    key={index}
+                    onConfirm={() => deleteNote(note?.note_id)}
+                  />
+                </TouchableOpacity>
               ))}
             </ScrollView>
           </View>
