@@ -131,6 +131,9 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
       });
   };
 
+  const refreshData = () => {
+    getAllNotes();
+  };
   return (
     <>
       <View style={styles.container}>
@@ -138,7 +141,7 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
           <TextInput
             label="Title"
             value={title}
-            onChangeText={text => setTitle(text)}           
+            onChangeText={text => setTitle(text)}
           />
           <TextInput
             label="Description"
@@ -153,17 +156,25 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
         <View style={styles.noteSection}>
           <Divider bold={true} />
           <View style={styles.listContainer}>
-            <Searchbar
-              placeholder="Search"
-              onChangeText={onChangeSearch}
-              value={searchQuery}
-            />
+            <View style={styles.searchBar}>
+              <Searchbar
+                placeholder="Search"
+                onChangeText={onChangeSearch}
+                value={searchQuery}
+              />
+              <TouchableOpacity onPress={() => refreshData()}>
+                <Button icon="refresh" children={undefined} textColor={'red'} />
+              </TouchableOpacity>
+            </View>
+
             {noteNotFoundMsg && (
               <Text style={styles.emptyMsg}>{'Did not find any note.'}</Text>
             )}
             <ScrollView>
               {allNotes?.map((note, index) => (
-                <TouchableOpacity key={index} onPress={() => goToNoteDetails(note)}>
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => goToNoteDetails(note)}>
                   <CustomCard
                     data={note}
                     key={index}

@@ -5,7 +5,7 @@ export const formatNumber = (_number: number) => {
 export const formtDate = (_date: string, _delimiter: string = '.') => {
   const _newDate = new Date(_date);
   const _min = formatNumber(_newDate.getMinutes());
-  const _hour = _newDate.getHours();
+  const _hour = formatNumber(_newDate.getHours());
   const _day = formatNumber(_newDate.getDay() + 1);
   const _month = formatNumber(_newDate.getMonth() + 1);
   const _year = _newDate.getFullYear();
