@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
   emptyMsg: {
     textAlign: 'center',
   },
+  searchBar: {
+    justifyContent: 'space-evenly',
+  },
 });
 
 export default styles;
