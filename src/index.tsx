@@ -8,6 +8,7 @@ import HomeScreen from './screens/home';
 import LoginScreen from './screens/login';
 import NoteScreen from './screens/notes';
 import ProfileScreen from './screens/profile';
+import NoteDetailsScreen from './screens/notes/note-details';
 const App = (): JSX.Element => {
   const [isAppLoading, setAppLoading] = useState(true);
   setTimeout(() => setAppLoading(false), 2000);
@@ -28,6 +29,11 @@ const App = (): JSX.Element => {
           name="Note"
           component={NoteScreen}
           options={{ title: 'Notes'}}
+        />
+        <Stack.Screen
+          name="NoteDetails"
+          component={NoteDetailsScreen}
+          options={{ title: 'Note Detail'}}
         />
         <Stack.Screen
           name="Profile"
