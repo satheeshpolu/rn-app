@@ -111,6 +111,22 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
     return data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
   };
 
+  const deleteNote = async (id: number) => {
+    await axios
+      .post(
+        `${BE_SERVER_URL}:${BE_SERVER_PORT}/${API_VERSION}${API_ENDPOINT.DELETE_NOTE}`,
+        {
+          note_id: id,
+        },
+      )
+      .then(function (response) {
+        getAllNotes();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -142,12 +158,19 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
             )}
             <ScrollView>
               {allNotes?.map((note, index) => (
-                <CustomCard data={note} key={index} />
+                <CustomCard
+                  data={note}
+                  key={index}
+                  onConfirm={() => deleteNote(note?.note_id)}
+                />
               ))}
             </ScrollView>
           </View>
         </View>
       </View>
+      {allNotes.length === 0 && (
+        <Text style={styles.emptyMsg}>{'Notes are empty, add new note.'}</Text>
+      )}
       {showSnackbar && (
         <CustomSnackbar title="Provide note info." onClose={onCloseSnackbar} />
       )}
