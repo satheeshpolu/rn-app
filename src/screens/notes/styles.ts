@@ -26,7 +26,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   searchBar: {
-    justifyContent: 'space-evenly',
+    gap: 10
+  },
+  touchableOpacity: {
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    gap: 10,
   },
 });
 

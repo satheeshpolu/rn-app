@@ -11,6 +11,7 @@ import {
   Snackbar,
   Text,
   Searchbar,
+  Avatar,
 } from 'react-native-paper';
 import axios from 'axios';
 import CustomCard from '../../atoms/custom-card';
@@ -28,6 +29,7 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
   const [allNotes, setAllNotes] = useState([]);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [noteNotFoundMsg, setNoteNotFoundMsg] = useState(false);
+  const [showNoteForm, setShowNoteForm] = useState(false);
 
   // Search feature
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -86,6 +88,7 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
     setTitle('');
     setDesc('');
     setShowSnackbar(false);
+    setShowNoteForm(false);
   };
 
   const goToNoteDetails = (data: object) => {
@@ -137,36 +140,46 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
   return (
     <>
       <View style={styles.container}>
-        <View style={styles.formSection}>
-          <TextInput
-            label="Title"
-            value={title}
-            onChangeText={text => setTitle(text)}
-          />
-          <TextInput
-            label="Description"
-            value={desc}
-            onChangeText={text => setDesc(text)}
-            multiline={true}
-          />
-          <Button icon="content-save" mode="contained" onPress={saveNotes}>
-            {'Save Note'}
-          </Button>
-        </View>
+        {showNoteForm && (
+          <View style={styles.formSection}>
+            <TextInput
+              label="Title"
+              value={title}
+              onChangeText={text => setTitle(text)}
+            />
+            <TextInput
+              label="Description"
+              value={desc}
+              onChangeText={text => setDesc(text)}
+              multiline={true}
+            />
+            <Button icon="content-save" mode="contained" onPress={saveNotes}>
+              {'Save Note'}
+            </Button>
+          </View>
+        )}
         <View style={styles.noteSection}>
-          <Divider bold={true} />
           <View style={styles.listContainer}>
             <View style={styles.searchBar}>
-              <Searchbar
-                placeholder="Search"
-                onChangeText={onChangeSearch}
-                value={searchQuery}
-              />
-              <TouchableOpacity onPress={() => refreshData()}>
-                <Button icon="refresh" children={undefined} textColor={'red'} />
-              </TouchableOpacity>
+              <View style={styles.touchableOpacity}>
+                <TouchableOpacity onPress={() => refreshData()}>
+                  <Avatar.Icon size={48} icon="refresh" />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setShowNoteForm(!showNoteForm)}>
+                  <Avatar.Icon
+                    size={48}
+                    icon={!showNoteForm ? 'plus' : 'minus'}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
-
+            <Divider bold={true} />
+            <Searchbar
+              placeholder="Search"
+              onChangeText={onChangeSearch}
+              value={searchQuery}
+            />
             {noteNotFoundMsg && (
               <Text style={styles.emptyMsg}>{'Did not find any note.'}</Text>
             )}
