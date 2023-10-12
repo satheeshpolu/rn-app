@@ -67,7 +67,7 @@ const ProfileScreen = ({ navigation }: ComponentProps): JSX.Element => {
           Eidt Profile
         </Button>
         <Button
-          icon="arrow-right"
+          icon="logout"
           mode="contained-tonal"
           contentStyle={{ flexDirection: 'row-reverse' }}
           onPress={() => setSignOutDialog(true)}>
