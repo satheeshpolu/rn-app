@@ -48,8 +48,9 @@ const NoteDetailsScreen = ({ navigation }: ComponentProps): JSX.Element => {
     setShowErrorMsg(false);
     // resetForm();
     // Keyboard.dismiss();
-    await axios
-      .post(
+    try {
+      await axios
+      .put(
         `${BE_SERVER_URL}:${BE_SERVER_PORT}/${API_VERSION}${API_ENDPOINT.UPDATE_NOTE}`,
         {
           note_id: noteDetails?.note_id,
@@ -67,6 +68,9 @@ const NoteDetailsScreen = ({ navigation }: ComponentProps): JSX.Element => {
       .catch(function (error) {
         console.log(error);
       });
+    } catch (error) {
+      console.log('updateNote =. ', error);
+    }
   };
   return (
     <>
