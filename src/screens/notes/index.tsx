@@ -119,11 +119,12 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
   };
 
   const deleteNote = async (id: number) => {
-    await axios
-      .post(
+    try {
+      await axios
+      .delete(
         `${BE_SERVER_URL}:${BE_SERVER_PORT}/${API_VERSION}${API_ENDPOINT.DELETE_NOTE}`,
         {
-          note_id: id,
+          data: { note_id: id }
         },
       )
       .then(function (response) {
@@ -132,6 +133,9 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
       .catch(function (error) {
         console.log(error);
       });
+    } catch (error) {
+      console.log('deleteNote => ', error);
+    }
   };
 
   const refreshData = () => {
