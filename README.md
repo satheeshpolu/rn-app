@@ -68,6 +68,9 @@ Add more notes to build your list:
 
 ![Additional Note](./src/assets/app-flow/app-5.png)
 
+## 🔍 Search Notes
+
+Search for a specific note to filter the results:
 ![More Notes](./src/assets/app-flow/app-6.png)
 
 ---
@@ -80,9 +83,9 @@ All the notes added are now visible in the main list:
 
 ---
 
-## 🔍 Search Notes
+## ✅ Edit Notes Confirmation
 
-Search for a specific note to filter the results:
+Request user confirmation
 
 ![Search Note](./src/assets/app-flow/app-8.png)
 
@@ -112,9 +115,9 @@ Note is saved successfully after updating:
 
 ---
 
-## 📄 Updated Notes List
+## 🔍 Search Notes
 
-View all notes including the updated ones:
+Search for a specific note to filter the results:
 
 ![Updated Notes List](./src/assets/app-flow/app-12.png)
 
