@@ -101,12 +101,14 @@ const NoteScreen = ({ navigation }: ScreenProps): JSX.Element => {
         `${BE_SERVER_URL}:${BE_SERVER_PORT}/${API_VERSION}${API_ENDPOINT.GET_ALL_NOTES}`,
       )
       .then(function (response) {
+        console.log("getAllNotes response====>", response?.data);
+
         sortDataByDate(response?.data?.result);
         setAllNotes(response?.data?.result);
         resetForm();
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error, "got Error====>");
       });
   };
 

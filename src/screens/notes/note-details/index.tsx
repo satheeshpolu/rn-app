@@ -45,6 +45,8 @@ const NoteDetailsScreen = ({ navigation }: ComponentProps): JSX.Element => {
       setShowErrorMsg(true);
       return;
     }
+    console.log('noteDetails => updateNote', title, desc);
+
     setShowErrorMsg(false);
     // resetForm();
     // Keyboard.dismiss();
